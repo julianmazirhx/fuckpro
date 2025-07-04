@@ -338,30 +338,37 @@ export function Campaigns() {
                   className="text-sm text-white bg-red-500 px-3 py-1 rounded hover:bg-red-600"
                 >
                   Delete
+          {campaigns.map((campaign) => (
+            <div key={campaign.id} className="border p-4 rounded-lg shadow-md mb-4">
+              <h2 className="text-xl font-semibold">{campaign.name}</h2>
+              <p className="text-gray-600">{campaign.description}</p>
+              <div className="mt-2 flex gap-2">
+                <Link to={`/edit/${campaign.id}`} className="text-blue-600 hover:underline">
+                  Edit
+                </Link>
+                <button onClick={() => handleDelete(campaign.id)} className="text-red-600 hover:underline">
+                  Delete
                 </button>
               </div>
+            </div>
+          ))}
+          {campaigns.length === 0 && (
+            <div className="text-center py-12">
+              <Target className="h-16 w-16 text-gray-400 mx-auto mb-4" />
+              <h3 className="text-xl font-medium text-gray-900 mb-2">
+                No campaigns yet
+              </h3>
+              <p className="text-gray-600 mb-6">
+                Create your first campaign to start reaching out to leads.
+              </p>
+              <button
+                onClick={() => setShowCreateForm(true)}
+                className="inline-flex items-center px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors"
+              >
+                Create Campaign
               </button>
             </div>
-          </div>
-        ))}
-        </div>
-        {campaigns.length === 0 && (
-          <div className="text-center py-12">
-            <Target className="h-16 w-16 text-gray-400 mx-auto mb-4" />
-            <h3 className="text-xl font-medium text-gray-900 mb-2">
-              No campaigns yet
-            </h3>
-            <p className="text-gray-600 mb-6">
-              Create your first campaign to start reaching out to leads.
-            </p>
-            <button
-              onClick={() => setShowCreateForm(true)}
-              className="inline-flex items-center px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors"
-            >
-              Create Campaign
-            </button>
-          </div>
-        )}
+          )}
             <Plus className="h-4 w-4 mr-2" />
             Create Your First Campaign
           </button>
